@@ -9,13 +9,6 @@ inline constexpr int N = 500;
 inline constexpr int R_V = 400;
 inline constexpr int TPS = 100;
 inline constexpr float pi = 3.1416f;
-inline constexpr int WIDTH = 1500, HEIGHT = 1000;
-inline constexpr int text_width = 175, text_height = 20;
-inline constexpr float lamp_x = 1000, lamp_y = 750;
-inline Color background_color = {20, 20, 35, 255};
-inline Color mirror_color = {0, 100, 255, 255};
-inline Color ray_color = {255, 255, 75, 255};
-// inline Color fps_text_color = {0, 255, 0, 255};
 
 
 class Vec2 {
@@ -51,6 +44,16 @@ class Ray1 {
         std::optional <Vec2> reflect (const Vec2& mirror_start, const Vec2& mirror_end);
 };
 
+
+void rays_track ();
+
+inline constexpr int WIDTH = 1500, HEIGHT = 1000;
+inline constexpr int text_width = 175, text_height = 20;
+inline constexpr float lamp_x = 1000, lamp_y = 750;
+inline Color background_color = {20, 20, 35, 255};
+inline Color mirror_color = {0, 100, 255, 255};
+inline Color ray_color = {255, 255, 75, 255};
+// inline Color fps_text_color = {0, 255, 0, 255};
 
 inline Vec2 mirror_start (600, 500);
 inline Vec2 mirror_end = {700, 300};
