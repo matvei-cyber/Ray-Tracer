@@ -1,1 +1,1 @@
-g++ -std=c++26 -O3 main.cpp methods.cpp -I "C:\Users\Матвей Иванов\Downloads\raylib-6.0_win64_mingw-w64\include" -L "C:\Users\Матвей Иванов\Downloads\raylib-6.0_win64_mingw-w64\lib" -lraylib -lopengl32 -lgdi32 -lwinmm -o "Release/Ray Tracer"
+g++ -std=c++26 -O3 main.cpp core.cpp -I "C:\Users\Матвей Иванов\Downloads\raylib-6.0_win64_mingw-w64\include" -L "C:\Users\Матвей Иванов\Downloads\raylib-6.0_win64_mingw-w64\lib" -lraylib -lopengl32 -lgdi32 -lwinmm -o "Release/Ray Tracer"
