@@ -32,9 +32,9 @@ class Ray1 {
         Vec2 cords;
         std::vector <Vec2> points;
         int num;
-        float angle = (2 * pi * num) / N;
-        Vec2 direction = Vec2 {std::cosf (angle), std::sinf (angle)}.normalize ();
-        bool intersection = false;
+        float angle;
+        Vec2 direction;
+        bool intersection;
 
         Ray1 ();
         Ray1 (Vec2 c, int n);
@@ -43,9 +43,6 @@ class Ray1 {
         std::optional <Vec2> check_intersection (const Vec2& mirror_start, const Vec2& mirror_end) const;
         std::optional <Vec2> reflect (const Vec2& mirror_start, const Vec2& mirror_end);
 };
-
-
-void rays_track ();
 
 inline constexpr int WIDTH = 1500, HEIGHT = 1000;
 inline constexpr int text_width = 175, text_height = 20;
@@ -61,3 +58,7 @@ inline float min_x = std::min (mirror_start.x, mirror_end.x);
 inline float max_x = std::max (mirror_start.x, mirror_end.x);
 inline float min_y = std::min (mirror_start.y, mirror_end.y);
 inline float max_y = std::max (mirror_start.y, mirror_end.y);
+inline bool isToggled = false;
+
+void rays_check (std::vector <Ray1>& rays);
+void rays_track ();
