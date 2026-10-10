@@ -1,1 +1,1 @@
-g++ -std=c++26 -O3 main.cpp core.cpp -L "/lib" -lraylib -lopengl32 -lgdi32 -lwinmm -o "Release/Ray Tracer" -static
+g++ -std=c++26 -O3 main.cpp core.cpp -L "/lib" -lraylib -lopengl32 -lgdi32 -lwinmm -static -o "Release/Ray Tracer"
