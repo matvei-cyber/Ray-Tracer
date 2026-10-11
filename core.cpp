@@ -38,7 +38,7 @@ Vec2 Vec2::normalize () const {
 Ray1::Ray1 () : cords (0.0f, 0.0f), num (0), angle (0.0f), direction (0.0f, 0.0f), intersection (false) {}
 
 Ray1::Ray1 (Vec2 c, int n) : cords (c), num (n) {
-        angle = (2 * pi * num) / N;
+        angle = (2 * pi * n) / N;
         direction = Vec2 {std::cosf (angle), std::sinf (angle)}.normalize ();
         intersection = false;
 }
