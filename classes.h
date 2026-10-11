@@ -45,20 +45,24 @@ class Ray1 {
         bool intersection;
 
         Ray1 ();
-        Ray1 (Vec2 c, int n);
+        Ray1 (Vec2 cords, int num);
 
         void ray_update ();
         std::optional <Vec2> check_intersection (const Vec2& mirror_start, const Vec2& mirror_end) const;
         std::optional <Vec2> reflect (const Vec2& mirror_start, const Vec2& mirror_end);
 };
 
+class Mirror {
+    public :
+        Vec2 mirror_start;
+        Vec2 mirror_end;
+        Vec2 mirror_vec;
 
-inline Vec2 mirror_start (600, 500);
-inline Vec2 mirror_end = {700, 300};
-inline float min_x = std::min (mirror_start.x, mirror_end.x);
-inline float max_x = std::max (mirror_start.x, mirror_end.x);
-inline float min_y = std::min (mirror_start.y, mirror_end.y);
-inline float max_y = std::max (mirror_start.y, mirror_end.y);
+        Mirror ();
+        Mirror (Vec2 mirror_start, Vec2 mirror_end);
+};
+
+
 inline bool isToggled = false;
 inline bool is_mouse_held;
 
