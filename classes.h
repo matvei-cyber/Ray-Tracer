@@ -59,6 +59,7 @@ inline float max_x = std::max (mirror_start.x, mirror_end.x);
 inline float min_y = std::min (mirror_start.y, mirror_end.y);
 inline float max_y = std::max (mirror_start.y, mirror_end.y);
 inline bool isToggled = false;
+inline bool is_mouse_held;
 
 void rays_check (std::vector <Ray1>& rays);
 void rays_track ();
