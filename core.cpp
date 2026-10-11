@@ -98,29 +98,47 @@ std::optional <Vec2> Ray1::reflect (const Vec2& mirror_start, const Vec2& mirror
 
 // Other functions
 void rays_check (std::vector <Ray1>& rays) {
-    for (int i = 0; i < N; i ++) {
-        if (isToggled == true) {
-            rays [i].ray_update ();
-            rays [i].points.emplace_back (Vec2 (rays [i].cords.x, rays [i].cords.y));
+    if (isToggled) {
+        if (IsMouseButtonReleased (MOUSE_BUTTON_LEFT)) {
+            for (int i = 0; i < N; i++) {
+                rays [i].cords = {lamp_x, lamp_y};
+                rays [i].intersection = false;
+                
+                rays [i].angle = (2 * pi * rays [i].num) / N;
+                rays [i].direction = Vec2 {std::cosf (rays [i].angle), std::sinf (rays [i].angle)}.normalize ();
+                
+                rays [i].points.clear ();
+                rays [i].points.emplace_back (Vec2 (lamp_x, lamp_y));
+            }
+        }
 
-            if (rays [i].cords.x >= min_x && rays [i].cords.x <= max_x && rays [i].cords.y >= min_y && rays [i].cords.y <= max_y) {
-                auto intersection_opt = rays [i].check_intersection (mirror_start, mirror_end);
-                if (intersection_opt.has_value () && rays [i].intersection == false) {
-                    Vec2 A = intersection_opt.value (); 
-                    Vec2 D = {rays [i].cords.x, rays [i].cords.y}; 
-                    float distance = (A - D).length ();
+        is_mouse_held = IsMouseButtonDown (MOUSE_BUTTON_LEFT);
 
-                    if (distance <= 5) {
-                        rays [i].intersection = true;
-                        rays [i].reflect (mirror_start, mirror_end);
+        for (int i = 0; i < N; i++) {
+            if (!is_mouse_held) {
+                rays [i].ray_update ();
+                rays [i].points.emplace_back (Vec2 (rays [i].cords.x, rays [i].cords.y));
+
+                if (rays [i].cords.x >= min_x && rays [i].cords.x <= max_x && rays [i].cords.y >= min_y && rays [i].cords.y <= max_y) {
+                    auto intersection_opt = rays [i].check_intersection (mirror_start, mirror_end);
+                    if (intersection_opt.has_value () && rays [i].intersection == false) {
+                        Vec2 A = intersection_opt.value ();
+                        Vec2 D = {rays [i].cords.x, rays [i].cords.y};
+                        float distance = (A - D).length ();
+
+                        if (distance <= 5) {
+                            rays [i].intersection = true;
+                            rays [i].reflect (mirror_start, mirror_end);
+                        }
                     }
                 }
             }
-
-            Vec2 start = {lamp_x, lamp_y};
-            Vec2 end = {rays [i].cords.x, rays [i].cords.y};
         }
-        DrawLineStrip (reinterpret_cast <const Vector2*> (rays [i].points.data ()), size (rays [i].points), ray_color);
+    }
+    for (int i = 0; i < N; i ++) {
+        if (!rays [i].points.empty ()) {
+            DrawLineStrip (reinterpret_cast <const Vector2*> (rays [i].points.data ()), rays [i].points.size (), ray_color);
+        }
     }
 }
 
@@ -133,7 +151,7 @@ void rays_track () {
 
     while (!WindowShouldClose ()) {
         if (IsKeyPressed (KEY_SPACE)) {
-            isToggled = !isToggled; 
+            isToggled = !isToggled;
         }
 
         BeginDrawing ();
